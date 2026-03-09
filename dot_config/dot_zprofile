@@ -1,0 +1,82 @@
+# ~/.zprofile: user-specific .zprofile file for zsh(1).
+#
+# This file is sourced only for login shells (i.e. shells
+# invoked with "-" as the first character of argv[0], and
+# shells invoked with the -l flag.)
+#
+# Global Order: zshenv, zprofile, zshrc, zlogin
+
+if [ -f "$HOME/.profile" ]; then
+    emulate sh -c '. "$HOME/.profile"'
+fi
+
+# ------------FZF--------------
+# Set up fzf key bindings and fuzzy completion
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
+
+# Setup fzf previews
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+
+# fzf preview for tmux
+export FZF_TMUX_OPTS=" -p90%,70% "  
+# -----------------------------
+
+# Custom aliases
+alias mkin='mkdir -p "$1" && cd "$1"'
+
+# Navigation & File Management (using eza instead of ls)
+alias ll='eza -la'
+alias la='eza -A'
+alias l='eza -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ~='cd ~'
+alias rmf='rm -rf'
+alias cpv='cp -v'
+
+# Git Shortcuts
+alias gst='git status'
+alias gco='git checkout'
+alias gaa='git add .'
+alias gp='git push'
+alias gl='git pull'
+alias gc='git commit -m'
+
+# System Utilities
+alias c='clear'
+alias q='exit'
+alias ports='netstat -tulanp'
+alias myip='curl ifconfig.me'
+alias serve='python3 -m http.server'
+
+# Fun & Useful
+alias weather='curl wttr.in'
+alias starwars='telnet towel.blinkenlights.nl'
+alias matrix='cmatrix'
+alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
+
+# Add this to your shell profile
+if command -v tmux &> /dev/null; then
+    # Only run tmux if:
+    # 1. We're in an interactive shell
+    # 2. We're not already inside tmux
+    # 3. The terminal supports tmux
+    if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ "$TERM" != "linux" ]]; then
+        
+        # Check if we're in SSH session
+        if [[ -n "$SSH_CONNECTION" ]]; then
+            # In SSH, attach to or create session named after user
+            tmux attach-session -t "$USER" || tmux new-session -s "$USER"
+        else
+            # Local terminal - let tmux resurrect handle session restoration
+            tmux
+        fi
+    fi
+fi
+alias rmdir="cd .. && rmdir \$(pwd -P)"
+alias lsrecent="eza --sort=modified --long"
