@@ -1,6 +1,5 @@
 {
-  "workbench.colorTheme": "Aura Dracula Spirit (Soft)",
-  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "Aura Dracula Spirit",
   // "workbench.editor.showTabs": "",
   "workbench.statusBar.visible": false,
   "workbench.startupEditor": "none",
@@ -51,8 +50,8 @@
   },
   "custom-ui-style.font.sansSerif": "Fira Code",
   // "editor.multiCursorModifier": "ctrlCmd",
-//   "editor.cursorBlinking": "solid",
-//   "editor.cursorStyle": "block",
+  //   "editor.cursorBlinking": "solid",
+  //   "editor.cursorStyle": "block",
   "workbench.colorCustomizations": {
     "editorCursor.background": "#000000",
     "editorOverviewRuler.wordHighlightStrongForeground": "#0000",
@@ -76,7 +75,7 @@
   "editor.fontFamily": "Fira Code",
   "editor.fontSize": 15,
   "editor.fontLigatures": true,
-//   "editor.lineHeight": 1.5,
+  //   "editor.lineHeight": 1.5,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -124,5 +123,12 @@
   "workbench.editor.editorActionsLocation": "hidden",
   "window.customTitleBarVisibility": "never",
   "window.menuBarVisibility": "toggle",
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "laravel-pint.enable": true,
+  "editor.formatOnSave": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "kilo-code.new.agentManagerOpen",
+    "kilo-code.new.agentManager.showTerminal"
+  ],
+  "chat.viewSessions.orientation": "stacked"
 }

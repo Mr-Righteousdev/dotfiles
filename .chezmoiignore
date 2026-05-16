@@ -1,0 +1,3 @@
+.config/tmux/plugins/**
+.config/kitty/kitty-themes/.git/**
+.config/scripts/.git/**
